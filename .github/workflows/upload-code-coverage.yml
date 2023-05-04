@@ -73,6 +73,7 @@ jobs:
             files: ./coverage.txt
             flags: defradb-tests
             name: codecov-report
+            sha: ${{ env.COMMIT_SHA }}
             fail_ci_if_error: true
             verbose: true
 
@@ -86,6 +87,7 @@ jobs:
           files: ./coverage.txt
           flags: defradb-tests
           name: codecov-report
+          sha: ${{ env.COMMIT_SHA }}
           fail_ci_if_error: true
           verbose: true
           # path_to_write_report: ./coverage/codecov_report.txt

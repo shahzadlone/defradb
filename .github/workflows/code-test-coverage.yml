@@ -14,14 +14,14 @@ on:
   pull_request:
     branches:
       - master
-      - develop
+      - Develop
 
   push:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
     branches:
       - master
-      - develop
+      - Develop
 
 jobs:
   code-test-coverage:
@@ -64,7 +64,7 @@ jobs:
         if: env.codecov_secret != ''
         uses: codecov/codecov-action@v3
         with:
-          token: ${{ env.CODECOV_SECRET }}
+          token: ${{ env.codecov_secret }}
           files: ./coverage.txt
           flags: defradb-tests
           name: codecov-report-token
