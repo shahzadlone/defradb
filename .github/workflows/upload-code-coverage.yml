@@ -72,7 +72,7 @@ jobs:
         run: |
           echo "Recieved"
           cat coverage.txt
-          ##TESTT
+          ##TEST
             #- name: Upload coverage to Codecov without token, retry on failure
             #  if: env.CODECOV_SECRET == ''
             #  uses: Wandalen/wretry.action@v1.0.36
