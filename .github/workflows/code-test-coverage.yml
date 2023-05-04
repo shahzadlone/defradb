@@ -54,8 +54,8 @@ jobs:
           with: |
             fail_ci_if_error: true
             files: ./coverage.txt
-            flags: defra-tests
-            name: codecov-umbrella
+            flags: defradb-tests
+            name: codecov-report-no-token
             verbose: true
 
       - name: Upload coverage to Codecov with token
@@ -64,11 +64,11 @@ jobs:
         if: env.codecov_secret != ''
         uses: codecov/codecov-action@v3
         with:
-          token: ${{ env.codecov_secret }}
-          fail_ci_if_error: true
+          token: ${{ env.CODECOV_SECRET }}
           files: ./coverage.txt
-          flags: defra-tests
-          name: codecov-umbrella
+          flags: defradb-tests
+          name: codecov-report-token
+          fail_ci_if_error: true
           verbose: true
           # path_to_write_report: ./coverage/codecov_report.txt
           # directory: ./coverage/reports/
