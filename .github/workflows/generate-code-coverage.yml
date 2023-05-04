@@ -1,0 +1,67 @@
+# Copyright 2023 Democratized Data Foundation
+#
+# Use of this software is governed by the Business Source License
+# included in the file licenses/BSL.txt.
+#
+# As of the Change Date specified in that file, in accordance with
+# the Business Source License, use of this software will be governed
+# by the Apache License, Version 2.0, included in the file
+# licenses/APL.txt.
+
+name: Generate Code Coverage Workflow
+
+on:
+  pull_request:
+    branches:
+      - master
+      - develop
+
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+    branches:
+      - master
+      - develop
+
+env:
+  # Note: latest head on PR is different (on pull_request) than the head on merge commit
+  # that triggers this (on push).
+  # Reference: https://github.com/orgs/community/discussions/26325
+  COMMIT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+
+jobs:
+  generate-code-coverage:
+    name: Generate code coverage job
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print pull_request head and github SHA
+        run: |
+          echo "COMMIT_SHA=[${COMMIT_SHA}]\n"
+          echo "github.event.pull_request.head.sha=[${{github.event.pull_request.head.sha}}]\n"
+          echo "github.sha=[${{github.sha}}]\n"
+
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github.event.workflow_run) }}
+        run: echo "$GITHUB_CONTEXT"
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Go environment explicitly
+        uses: actions/setup-go@v3
+        with:
+          go-version: "1.19"
+          check-latest: true
+
+      - name: Generate full test coverage report
+        run: make test:coverage
+
+      - name: Save coverage report as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report-artifact-${{ env.COMMIT_SHA }}
+          path: coverage.txt
+          retention-days: 90
