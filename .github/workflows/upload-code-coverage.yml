@@ -27,6 +27,7 @@ on:
 
 env:
   RELEVANT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+  HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
   CODECOV_SECRET: ${{ secrets.CODECOV_TOKEN }}
   WORKFLOW_RUN_ID: ${{ github.event.workflow_run.id }}
 
@@ -43,6 +44,7 @@ jobs:
         run: |
           echo "Workflow run id=[${WORKFLOW_RUN_ID}]\n"
           echo "Relevant commit SHA=[${RELEVANT_SHA}]\n"
+          echo "HEAD_BRANCH=[${HEAD_BRANCH}]\n"
           echo "PR_SHA=[${{github.event.pull_request.head.sha}}]\n"
           echo "GH_SHA=[${{github.sha}}]\n"
 
@@ -51,9 +53,10 @@ jobs:
         with:
           repo: ${{ github.repository }}
           workflow: generate-code-coverage.yml
-          # workflow_conclusion: success
-          run_id: ${{ env.WORKFLOW_RUN_ID }}
-          name: coverage-report-artifact-${{ env.RELEVANT_SHA }}
+          workflow_conclusion: success
+          # run_id: ${{ env.WORKFLOW_RUN_ID }}
+          # commit: ${{github.event.pull_request.head.sha}}
+          name: coverage-report-artifact-${{ env.HEAD_BRANCH }}
           name_is_regexp: false
           search_artifacts: false
           check_artifacts: false
@@ -63,7 +66,7 @@ jobs:
         run: |
           echo "Recieved"
           cat coverage.txt
-
+          ##TEST
             #- name: Upload coverage to Codecov without token, retry on failure
             #  if: env.CODECOV_SECRET == ''
             #  uses: Wandalen/wretry.action@v1.0.36
