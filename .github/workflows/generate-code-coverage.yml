@@ -9,7 +9,7 @@
 # licenses/APL.txt.
 
 name: Generate Code Coverage Workflow
-  #TEST
+
 on:
   pull_request:
     branches:
