@@ -36,7 +36,7 @@ func TestMutationUpdateOneToOne_RelationIDToLinkFromPrimarySide(t *testing.T) {
 	bookKey := "bae-22e0a1c2-d12b-5bfd-b039-0cf72f963991"
 
 	test := testUtils.TestCase{
-		Description: "One to one update mutation using relation id from single side (wrong)",
+		Description: "One to one update mutation using relation id from single side",
 		Actions: []any{
 			testUtils.Request{
 				Request: `mutation {
