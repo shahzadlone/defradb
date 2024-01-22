@@ -11,11 +11,13 @@
 name: Release workflow
 
 on:
-  workflow_dispatch:
-    inputs:
-      tag:
-        description: 'New tag name'
-        required: true
+  #  workflow_dispatch:
+  #    inputs:
+  #      tag:
+  #        description: 'New tag name'
+  #        required: true
+
+  push:
 
 permissions:
   contents: write
