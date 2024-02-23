@@ -88,6 +88,7 @@ const (
 	errCanNotIndexNonUniqueFields         string = "can not index a doc's field(s) that violates unique index"
 	errInvalidViewQuery                   string = "the query provided is not valid as a View"
 	errCanNotHavePolicyWithoutACPModule   string = "can not specify policy on collection, without an acp module"
+	errCanNotCreateDocOnPermColNoACP      string = "can not create doc on permissioned collection without an acp module"
 )
 
 var (
