@@ -79,6 +79,9 @@ const (
 	// Instantiating lenses is expensive, and our tests do not benefit from a large number of them,
 	// so we explicitly set it to a low value.
 	lensPoolSize = 2
+
+	// Invalid doc string for testing invalid docID input.
+	invalidDocID = "bae-b769708d-f552-5c3d-a402-ccfd7ac7fb04"
 )
 
 const testJSONFile = "/test.json"
@@ -1287,6 +1290,21 @@ func updateDocViaColSave(
 	node client.P2P,
 	collections []client.Collection,
 ) error {
+	if action.DocID < 0 {
+		docID, err := client.NewDocIDFromString(invalidDocID)
+		if err != nil {
+			return err
+		}
+		collection := collections[action.CollectionID]
+		invalidDoc := client.NewDocWithID(docID, collection.Schema())
+		err = invalidDoc.SetWithJSON([]byte(action.Doc))
+		if err != nil {
+			return err
+		}
+		return collections[action.CollectionID].Save(s.ctx, invalidDoc)
+
+	}
+
 	cachedDoc := s.documents[action.CollectionID][action.DocID]
 
 	doc, err := collections[action.CollectionID].Get(s.ctx, cachedDoc.ID(), true)
@@ -1300,8 +1318,8 @@ func updateDocViaColSave(
 	}
 
 	s.documents[action.CollectionID][action.DocID] = doc
-
 	return collections[action.CollectionID].Save(s.ctx, doc)
+
 }
 
 func updateDocViaColUpdate(
@@ -1310,6 +1328,20 @@ func updateDocViaColUpdate(
 	node client.P2P,
 	collections []client.Collection,
 ) error {
+	if action.DocID < 0 {
+		docID, err := client.NewDocIDFromString(invalidDocID)
+		if err != nil {
+			return err
+		}
+		collection := collections[action.CollectionID]
+		invalidDoc := client.NewDocWithID(docID, collection.Schema())
+		err = invalidDoc.SetWithJSON([]byte(action.Doc))
+		if err != nil {
+			return err
+		}
+		return collections[action.CollectionID].Update(s.ctx, invalidDoc)
+
+	}
 	cachedDoc := s.documents[action.CollectionID][action.DocID]
 
 	doc, err := collections[action.CollectionID].Get(s.ctx, cachedDoc.ID(), true)
@@ -1323,8 +1355,8 @@ func updateDocViaColUpdate(
 	}
 
 	s.documents[action.CollectionID][action.DocID] = doc
-
 	return collections[action.CollectionID].Update(s.ctx, doc)
+
 }
 
 func updateDocViaGQL(
@@ -1333,7 +1365,15 @@ func updateDocViaGQL(
 	node client.P2P,
 	collections []client.Collection,
 ) error {
-	doc := s.documents[action.CollectionID][action.DocID]
+	var docIDStr string
+
+	if action.DocID < 0 {
+		docIDStr = invalidDocID
+	} else {
+		doc := s.documents[action.CollectionID][action.DocID]
+		docIDStr = doc.ID().String()
+	}
+
 	collection := collections[action.CollectionID]
 
 	input, err := jsonToGQL(action.Doc)
@@ -1346,7 +1386,7 @@ func updateDocViaGQL(
 			}
 		}`,
 		collection.Name().Value(),
-		doc.ID().String(),
+		docIDStr,
 		input,
 	)
 
