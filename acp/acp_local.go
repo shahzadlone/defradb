@@ -27,6 +27,11 @@ type ACPLocal struct {
 
 var _ sourceHubClient = (*ACPLocal)(nil)
 
+// localSourceHubAccountAddress is an absolute / static sourcehub account address that
+// is used for local acp when an address is required. This is done to make local acp
+// usage simple for users.
+const localSourceHubAccountAddress = "source1aq9ceqp35lscgvmupry62akefp5up42wkyyums"
+
 func (l *ACPLocal) Init(ctx context.Context, path string) {
 	if path == "" {
 		l.pathToStore = immutable.None[string]()
@@ -72,8 +77,9 @@ func (l *ACPLocal) AddPolicy(
 	policyMarshalType types.PolicyMarshalingType,
 	creationTime *protoTypes.Timestamp,
 ) (string, error) {
+	// Use the sourcehub address reserved for local acp as the creator.
 	createPolicy := types.MsgCreatePolicy{
-		Creator:      creatorID,
+		Creator:      localSourceHubAccountAddress,
 		Policy:       policy,
 		MarshalType:  policyMarshalType,
 		CreationTime: protoTypes.TimestampNow(),
