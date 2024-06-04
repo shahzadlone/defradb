@@ -20,6 +20,9 @@ import (
 // None specifies an anonymous actor.
 var None = immutable.None[Identity]()
 
+// AccountAddressPrefix is the prefix part of the sourcehub account address.
+const AccountAddressPrefix = "source"
+
 // Identity describes a unique actor.
 type Identity struct {
 	// PublicKey is the actor's public key.
@@ -54,5 +57,5 @@ func FromPublicKey(publicKey *secp256k1.PublicKey) immutable.Option[Identity] {
 func AddressFromPublicKey(publicKey *secp256k1.PublicKey) string {
 	pub := cosmosSecp256k1.PubKey{Key: publicKey.SerializeCompressed()}
 	// conversion from well known types should never cause a panic
-	return types.MustBech32ifyAddressBytes("cosmos", pub.Address().Bytes())
+	return types.MustBech32ifyAddressBytes(AccountAddressPrefix, pub.Address().Bytes())
 }

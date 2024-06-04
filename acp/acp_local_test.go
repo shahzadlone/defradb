@@ -17,8 +17,8 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-var identity1 = "cosmos1zzg43wdrhmmk89z3pmejwete2kkd4a3vn7w969"
-var identity2 = "cosmos1x25hhksxhu86r45hqwk28dd70qzux3262hdrll"
+var identity1 = "source1vljsaxwn2y85kaxpvmf6a2qnehzqhgn4w2lplz"
+var identity2 = "source1sh98gtkgqhx43gutgl9sune64u2hccuqxseall"
 
 var validPolicyID string = "c9a09896395d8a173633626253c01d5380a635fe8a0a103b10685e1b2e81f95a"
 var validPolicy string = `
