@@ -43,7 +43,7 @@ func TestACP_AddDPISchema_AddDuplicateDPIsByOtherCreatorsUseBoth_AcceptSchema(t 
                   - actor
     `
 
-	const policyIDOfFirstCreatorsDPI string = "d5b240c738dba7fe7d8ae55acf257d8e4010c9d8b78e0b1f0bd26741b1ec5663"
+	const policyIDOfFirstCreatorsDPI string = "c9a09896395d8a173633626253c01d5380a635fe8a0a103b10685e1b2e81f95a"
 	const policyIDOfSecondCreatorsDPI string = "6d2ec2fd16ed62a1cad05d8e791abe12cbbf9551080c0ca052336b49e635c291"
 
 	test := testUtils.TestCase{

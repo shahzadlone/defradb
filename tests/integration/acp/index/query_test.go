@@ -24,12 +24,12 @@ func TestACPWithIndex_UponQueryingPrivateDocWithoutIdentity_ShouldNotFetch(t *te
 			testUtils.AddPolicy{
 				Identity:         acpUtils.Actor1Identity,
 				Policy:           userPolicy,
-				ExpectedPolicyID: "a42e109f1542da3fef5f8414621a09aa4805bf1ac9ff32ad9940bd2c488ee6cd",
+				ExpectedPolicyID: "9b5bf263a047605cce43360bf0546911b3d5da78b2b12a894318ad2a084a4a21",
 			},
 			testUtils.SchemaUpdate{
 				Schema: `
 					type Users @policy(
-						id: "a42e109f1542da3fef5f8414621a09aa4805bf1ac9ff32ad9940bd2c488ee6cd",
+						id: "9b5bf263a047605cce43360bf0546911b3d5da78b2b12a894318ad2a084a4a21",
 						resource: "users"
 					) {
 						name: String @index
@@ -78,12 +78,12 @@ func TestACPWithIndex_UponQueryingPrivateDocWithIdentity_ShouldFetch(t *testing.
 			testUtils.AddPolicy{
 				Identity:         acpUtils.Actor1Identity,
 				Policy:           userPolicy,
-				ExpectedPolicyID: "a42e109f1542da3fef5f8414621a09aa4805bf1ac9ff32ad9940bd2c488ee6cd",
+				ExpectedPolicyID: "9b5bf263a047605cce43360bf0546911b3d5da78b2b12a894318ad2a084a4a21",
 			},
 			testUtils.SchemaUpdate{
 				Schema: `
 					type Users @policy(
-						id: "a42e109f1542da3fef5f8414621a09aa4805bf1ac9ff32ad9940bd2c488ee6cd",
+						id: "9b5bf263a047605cce43360bf0546911b3d5da78b2b12a894318ad2a084a4a21",
 						resource: "users"
 					) {
 						name: String @index
@@ -136,12 +136,12 @@ func TestACPWithIndex_UponQueryingPrivateDocWithWrongIdentity_ShouldNotFetch(t *
 			testUtils.AddPolicy{
 				Identity:         acpUtils.Actor1Identity,
 				Policy:           userPolicy,
-				ExpectedPolicyID: "a42e109f1542da3fef5f8414621a09aa4805bf1ac9ff32ad9940bd2c488ee6cd",
+				ExpectedPolicyID: "9b5bf263a047605cce43360bf0546911b3d5da78b2b12a894318ad2a084a4a21",
 			},
 			testUtils.SchemaUpdate{
 				Schema: `
 					type Users @policy(
-						id: "a42e109f1542da3fef5f8414621a09aa4805bf1ac9ff32ad9940bd2c488ee6cd",
+						id: "9b5bf263a047605cce43360bf0546911b3d5da78b2b12a894318ad2a084a4a21",
 						resource: "users"
 					) {
 						name: String @index

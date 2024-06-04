@@ -18,7 +18,7 @@ import (
 )
 
 func TestACP_AddDPISchema_OwnerMissingRequiredReadPermissionOnDPI_SchemaRejected(t *testing.T) {
-	policyIDOfInvalidDPI := "d3b58e284fb1117eb9c0111105195c910a6873d70695d8d3af3a967632bd5a5c"
+	policyIDOfInvalidDPI := "8a0740b3f9a613e892ed458a5180419ad2781ac74c386388eda64a6efc74eefa"
 
 	test := testUtils.TestCase{
 
@@ -102,7 +102,7 @@ func TestACP_AddDPISchema_OwnerMissingRequiredReadPermissionOnDPI_SchemaRejected
 }
 
 func TestACP_AddDPISchema_OwnerMissingRequiredReadPermissionLabelOnDPI_SchemaRejected(t *testing.T) {
-	policyIDOfInvalidDPI := "6f81aa1e33a6888e041ed7686f21007d09b30ae218fb2ce19071ea2155482b23"
+	policyIDOfInvalidDPI := "14d9bfd3a982a8e74c6275bd72f6a1677ff2608b13b7f77f7b5aa68fad66135c"
 
 	test := testUtils.TestCase{
 
@@ -185,7 +185,7 @@ func TestACP_AddDPISchema_OwnerMissingRequiredReadPermissionLabelOnDPI_SchemaRej
 }
 
 func TestACP_AddDPISchema_OwnerSpecifiedIncorrectlyOnReadPermissionExprOnDPI_SchemaRejected(t *testing.T) {
-	policyIDOfInvalidDPI := "7f291632f6772e108830d41a5388391fc04cd4f2473d2a759d2a3326ee973848"
+	policyIDOfInvalidDPI := "ef4bffcb1c1e806334c3dacded64cb55070caf5d497073e4ee6205b4431535a1"
 
 	test := testUtils.TestCase{
 
@@ -269,7 +269,7 @@ func TestACP_AddDPISchema_OwnerSpecifiedIncorrectlyOnReadPermissionExprOnDPI_Sch
 }
 
 func TestACP_AddDPISchema_OwnerSpecifiedIncorrectlyOnReadPermissionNoSpaceExprOnDPI_SchemaRejected(t *testing.T) {
-	policyIDOfInvalidDPI := "aa4c2b7bc9177a7b1cb808289a7f03564c489cc5c829ef756997cbe47b689a3f"
+	policyIDOfInvalidDPI := "c3956fc65a5ab3f42edb59ad89f9b264bae88abf14f6edc962ad851874b31722"
 
 	test := testUtils.TestCase{
 
@@ -353,7 +353,7 @@ func TestACP_AddDPISchema_OwnerSpecifiedIncorrectlyOnReadPermissionNoSpaceExprOn
 }
 
 func TestACP_AddDPISchema_MaliciousOwnerSpecifiedOnReadPermissionExprOnDPI_SchemaRejected(t *testing.T) {
-	policyIDOfInvalidDPI := "f52f9a23643c6d52f4aaf2569885c152f06edc7d95647f88f6c4e8ead757e792"
+	policyIDOfInvalidDPI := "494efa6ce933445dddec2682d7b3f39493fc04c3d2fd0752faa7a85ce944eb5c"
 
 	test := testUtils.TestCase{
 

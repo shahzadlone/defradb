@@ -46,7 +46,7 @@ func TestACP_AddPolicy_AddMultipleDifferentPolicies_ValidPolicyIDs(t *testing.T)
 
                 `,
 
-				ExpectedPolicyID: "aa664afaf8dff947ba85f4d464662d595af6c1e2466bd11fd6b82ea95b547ea3",
+				ExpectedPolicyID: "cd5b3a63b20b885afd0a9d9faf28ed904715e3bbc5b03064fe2b60eb0ce478cb",
 			},
 
 			testUtils.AddPolicy{
@@ -80,7 +80,7 @@ func TestACP_AddPolicy_AddMultipleDifferentPolicies_ValidPolicyIDs(t *testing.T)
                               - actor
                 `,
 
-				ExpectedPolicyID: "a42e109f1542da3fef5f8414621a09aa4805bf1ac9ff32ad9940bd2c488ee6cd",
+				ExpectedPolicyID: "9b5bf263a047605cce43360bf0546911b3d5da78b2b12a894318ad2a084a4a21",
 			},
 		},
 	}
@@ -125,7 +125,7 @@ func TestACP_AddPolicy_AddMultipleDifferentPoliciesInDifferentFmts_ValidPolicyID
                     }
                 `,
 
-				ExpectedPolicyID: "aa664afaf8dff947ba85f4d464662d595af6c1e2466bd11fd6b82ea95b547ea3",
+				ExpectedPolicyID: "cd5b3a63b20b885afd0a9d9faf28ed904715e3bbc5b03064fe2b60eb0ce478cb",
 			},
 
 			testUtils.AddPolicy{
@@ -159,7 +159,7 @@ func TestACP_AddPolicy_AddMultipleDifferentPoliciesInDifferentFmts_ValidPolicyID
                               - actor
                 `,
 
-				ExpectedPolicyID: "a42e109f1542da3fef5f8414621a09aa4805bf1ac9ff32ad9940bd2c488ee6cd",
+				ExpectedPolicyID: "9b5bf263a047605cce43360bf0546911b3d5da78b2b12a894318ad2a084a4a21",
 			},
 		},
 	}
@@ -198,7 +198,7 @@ func TestACP_AddPolicy_AddDuplicatePolicyByOtherCreator_ValidPolicyIDs(t *testin
 
 				Policy: policyUsedByBoth,
 
-				ExpectedPolicyID: "aa664afaf8dff947ba85f4d464662d595af6c1e2466bd11fd6b82ea95b547ea3",
+				ExpectedPolicyID: "cd5b3a63b20b885afd0a9d9faf28ed904715e3bbc5b03064fe2b60eb0ce478cb",
 			},
 
 			testUtils.AddPolicy{
@@ -244,7 +244,7 @@ func TestACP_AddPolicy_AddMultipleDuplicatePolicies_Error(t *testing.T) {
 
                 `,
 
-				ExpectedPolicyID: "aa664afaf8dff947ba85f4d464662d595af6c1e2466bd11fd6b82ea95b547ea3",
+				ExpectedPolicyID: "cd5b3a63b20b885afd0a9d9faf28ed904715e3bbc5b03064fe2b60eb0ce478cb",
 			},
 
 			testUtils.AddPolicy{
@@ -271,7 +271,7 @@ func TestACP_AddPolicy_AddMultipleDuplicatePolicies_Error(t *testing.T) {
 
                 `,
 
-				ExpectedError: "policy aa664afaf8dff947ba85f4d464662d595af6c1e2466bd11fd6b82ea95b547ea3: policy exists",
+				ExpectedError: "policy cd5b3a63b20b885afd0a9d9faf28ed904715e3bbc5b03064fe2b60eb0ce478cb: policy exists",
 			},
 		},
 	}
@@ -308,7 +308,7 @@ func TestACP_AddPolicy_AddMultipleDuplicatePoliciesDifferentFmts_Error(t *testin
                               - actor
                 `,
 
-				ExpectedPolicyID: "aa664afaf8dff947ba85f4d464662d595af6c1e2466bd11fd6b82ea95b547ea3",
+				ExpectedPolicyID: "cd5b3a63b20b885afd0a9d9faf28ed904715e3bbc5b03064fe2b60eb0ce478cb",
 			},
 
 			testUtils.AddPolicy{
@@ -342,7 +342,7 @@ func TestACP_AddPolicy_AddMultipleDuplicatePoliciesDifferentFmts_Error(t *testin
                    }
                `,
 
-				ExpectedError: "policy aa664afaf8dff947ba85f4d464662d595af6c1e2466bd11fd6b82ea95b547ea3: policy exists",
+				ExpectedError: "policy cd5b3a63b20b885afd0a9d9faf28ed904715e3bbc5b03064fe2b60eb0ce478cb: policy exists",
 			},
 		},
 	}

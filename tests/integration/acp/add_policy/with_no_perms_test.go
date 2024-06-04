@@ -87,7 +87,7 @@ func TestACP_AddPolicy_NoPermissionsMultiRelations_ValidID(t *testing.T) {
 
                 `,
 
-				ExpectedPolicyID: "07da6260811df769d551e89e02364b3e939cb585696c1a69b626bb8ecdd378f9",
+				ExpectedPolicyID: "4966d643ba8b0b555624882d5ecc722a38228d99f5f7c930bfbb8843126ba349",
 			},
 		},
 	}
@@ -154,7 +154,7 @@ func TestACP_AddPolicy_NoPermissionsLabelMultiRelations_ValidID(t *testing.T) {
 
                 `,
 
-				ExpectedPolicyID: "07da6260811df769d551e89e02364b3e939cb585696c1a69b626bb8ecdd378f9",
+				ExpectedPolicyID: "4966d643ba8b0b555624882d5ecc722a38228d99f5f7c930bfbb8843126ba349",
 			},
 		},
 	}

@@ -20,7 +20,7 @@ import (
 var identity1 = "cosmos1zzg43wdrhmmk89z3pmejwete2kkd4a3vn7w969"
 var identity2 = "cosmos1x25hhksxhu86r45hqwk28dd70qzux3262hdrll"
 
-var validPolicyID string = "4f13c5084c3d0e1e5c5db702fceef84c3b6ab948949ca8e27fcaad3fb8bc39f4"
+var validPolicyID string = "c9a09896395d8a173633626253c01d5380a635fe8a0a103b10685e1b2e81f95a"
 var validPolicy string = `
 description: a policy
 

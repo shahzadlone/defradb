@@ -19,7 +19,7 @@ import (
 )
 
 func TestACP_AddDPISchema_WithManagedRelation_AcceptSchemas(t *testing.T) {
-	policyIDOfValidDPI := "a42e109f1542da3fef5f8414621a09aa4805bf1ac9ff32ad9940bd2c488ee6cd"
+	policyIDOfValidDPI := "9b5bf263a047605cce43360bf0546911b3d5da78b2b12a894318ad2a084a4a21"
 
 	test := testUtils.TestCase{
 

@@ -58,13 +58,13 @@ func getSetupEmployeeCompanyActions() []any {
 		testUtils.AddPolicy{
 			Identity:         acpUtils.Actor1Identity,
 			Policy:           employeeCompanyPolicy,
-			ExpectedPolicyID: "6f11799717723307077147736fddccd8a7b5e68d2ec22e2155f0186e0c43a2e2",
+			ExpectedPolicyID: "1650715d9c4fe08bace90708a837a57f4cc83aaa3b1048d586812074592dc14c",
 		},
 
 		testUtils.SchemaUpdate{
 			Schema: `
 					type Employee @policy(
-						id: "6f11799717723307077147736fddccd8a7b5e68d2ec22e2155f0186e0c43a2e2",
+						id: "1650715d9c4fe08bace90708a837a57f4cc83aaa3b1048d586812074592dc14c",
 						resource: "employees"
 					) {
 						name: String
@@ -73,7 +73,7 @@ func getSetupEmployeeCompanyActions() []any {
 					}
 
 					type Company @policy(
-						id: "6f11799717723307077147736fddccd8a7b5e68d2ec22e2155f0186e0c43a2e2",
+						id: "1650715d9c4fe08bace90708a837a57f4cc83aaa3b1048d586812074592dc14c",
 						resource: "companies"
 					) {
 						name: String

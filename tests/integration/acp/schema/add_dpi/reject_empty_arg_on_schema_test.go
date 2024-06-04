@@ -17,7 +17,7 @@ import (
 )
 
 func TestACP_AddDPISchema_NoArgWasSpecifiedOnSchema_SchemaRejected(t *testing.T) {
-	policyIDOfValidDPI := "d5b240c738dba7fe7d8ae55acf257d8e4010c9d8b78e0b1f0bd26741b1ec5663"
+	policyIDOfValidDPI := "c9a09896395d8a173633626253c01d5380a635fe8a0a103b10685e1b2e81f95a"
 
 	test := testUtils.TestCase{
 
@@ -91,7 +91,7 @@ func TestACP_AddDPISchema_NoArgWasSpecifiedOnSchema_SchemaRejected(t *testing.T)
 }
 
 func TestACP_AddDPISchema_SpecifiedArgsAreEmptyOnSchema_SchemaRejected(t *testing.T) {
-	policyIDOfValidDPI := "d5b240c738dba7fe7d8ae55acf257d8e4010c9d8b78e0b1f0bd26741b1ec5663"
+	policyIDOfValidDPI := "c9a09896395d8a173633626253c01d5380a635fe8a0a103b10685e1b2e81f95a"
 
 	test := testUtils.TestCase{
 

@@ -18,7 +18,7 @@ import (
 )
 
 func TestACP_AddDPISchema_WhereNoPolicyWasAdded_SchemaRejected(t *testing.T) {
-	nonExistingPolicyID := "aa664afaf8dff947ba85f4d464662d595af6c1e2466bd11fd6b82ea95b547ea3"
+	nonExistingPolicyID := "cd5b3a63b20b885afd0a9d9faf28ed904715e3bbc5b03064fe2b60eb0ce478cb"
 
 	test := testUtils.TestCase{
 
@@ -68,8 +68,8 @@ func TestACP_AddDPISchema_WhereNoPolicyWasAdded_SchemaRejected(t *testing.T) {
 }
 
 func TestACP_AddDPISchema_WhereAPolicyWasAddedButLinkedPolicyWasNotAdded_SchemaRejected(t *testing.T) {
-	policyAdded := "d5b240c738dba7fe7d8ae55acf257d8e4010c9d8b78e0b1f0bd26741b1ec5663"
-	incorrectPolicyID := "aa664afaf8dff947ba85f4d464662d595af6c1e2466bd11fd6b82ea95b547ea3"
+	policyAdded := "c9a09896395d8a173633626253c01d5380a635fe8a0a103b10685e1b2e81f95a"
+	incorrectPolicyID := "cd5b3a63b20b885afd0a9d9faf28ed904715e3bbc5b03064fe2b60eb0ce478cb"
 
 	test := testUtils.TestCase{
 
