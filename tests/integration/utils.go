@@ -320,6 +320,9 @@ func performAction(
 	case AddPolicy:
 		addPolicyACP(s, action)
 
+	case AddDocActorRelationship:
+		addDocActorRelationshipACP(s, action)
+
 	case CreateDoc:
 		createDoc(s, action)
 
