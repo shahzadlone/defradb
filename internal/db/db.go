@@ -31,6 +31,7 @@ import (
 	"github.com/sourcenetwork/defradb/errors"
 	"github.com/sourcenetwork/defradb/event"
 	"github.com/sourcenetwork/defradb/internal/core"
+	"github.com/sourcenetwork/defradb/internal/db/permission"
 	"github.com/sourcenetwork/defradb/internal/request/graphql"
 )
 
@@ -180,8 +181,9 @@ func (db *db) AddPolicy(
 	policy string,
 ) (client.AddPolicyResult, error) {
 	if !db.acp.HasValue() {
-		return client.AddPolicyResult{}, client.ErrPolicyAddFailureNoACP
+		return client.AddPolicyResult{}, client.ErrACPOperationButACPNotAvailable
 	}
+
 	identity := GetContextIdentity(ctx)
 
 	policyID, err := db.acp.Value().AddPolicy(
@@ -194,6 +196,46 @@ func (db *db) AddPolicy(
 	}
 
 	return client.AddPolicyResult{PolicyID: policyID}, nil
+}
+
+func (db *db) AddDocActorRelationship(
+	ctx context.Context,
+	collectionName string,
+	docID string,
+	relation string,
+	targetActor string,
+) (bool, error) {
+	if !db.acp.HasValue() {
+		return false, client.ErrACPOperationButACPNotAvailable
+	}
+
+	collection, err := db.GetCollectionByName(ctx, collectionName)
+	if err != nil {
+		return false, err
+	}
+
+	policyID, resourceName, hasPolicy := permission.IsPermissioned(collection)
+	if !hasPolicy {
+		return false, client.ErrACPOperationButCollectionHasNoPolicy
+	}
+
+	identity := GetContextIdentity(ctx)
+
+	exists, err := db.acp.Value().AddDocActorRelationship(
+		ctx,
+		policyID,
+		resourceName,
+		docID,
+		relation,
+		identity.Value(),
+		targetActor,
+	)
+
+	if err != nil {
+		return false, err
+	}
+
+	return exists, nil
 }
 
 // Initialize is called when a database is first run and creates all the db global meta data

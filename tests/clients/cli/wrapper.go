@@ -195,6 +195,34 @@ func (w *Wrapper) AddPolicy(
 	return addPolicyResult, err
 }
 
+func (w *Wrapper) AddDocActorRelationship(
+	ctx context.Context,
+	collectionName string,
+	docID string,
+	relation string,
+	targetActor string,
+) (bool, error) {
+	args := []string{
+		"client", "acp", "relationship", "add",
+		"--collection", collectionName,
+		"--docID", docID,
+		"--relation", relation,
+		"--actor", targetActor,
+	}
+
+	data, err := w.cmd.execute(ctx, args)
+	if err != nil {
+		return false, err
+	}
+
+	var exists bool
+	if err := json.Unmarshal(data, &exists); err != nil {
+		return false, err
+	}
+
+	return exists, err
+}
+
 func (w *Wrapper) AddSchema(ctx context.Context, schema string) ([]client.CollectionDescription, error) {
 	args := []string{"client", "schema", "add"}
 	args = append(args, schema)
