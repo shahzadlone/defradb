@@ -62,6 +62,7 @@ func init() {
 	if acpType == "" {
 		acpType = LocalACPType
 	}
+	acpType = SourceHubACPType
 }
 
 // AddPolicy will attempt to add the given policy using DefraDB's ACP system.

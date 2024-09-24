@@ -59,6 +59,9 @@ func init() {
 	goClient, _ = strconv.ParseBool(os.Getenv(clientGoEnvName))
 	cliClient, _ = strconv.ParseBool(os.Getenv(clientCliEnvName))
 
+	httpClient = true
+	// cliClient = true
+
 	if !goClient && !httpClient && !cliClient {
 		// Default is to test go client type.
 		goClient = true
