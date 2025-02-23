@@ -1,0 +1,52 @@
+# Copyright 2025 Democratized Data Foundation
+#
+# Use of this software is governed by the Business Source License
+# included in the file licenses/BSL.txt.
+#
+# As of the Change Date specified in that file, in accordance with
+# the Business Source License, use of this software will be governed
+# by the Apache License, Version 2.0, included in the file
+# licenses/APL.txt.
+
+name: 'Setup Ollama Composite'
+
+description: 'Composite action to setup, serve and pull models for ollama'
+
+runs:
+  # This is a composite action, setting this is required.
+  using: "composite"
+
+  steps:
+    - name: Ollama cache/restore
+      id: cache-ollama
+      uses: actions/cache@v4
+      with:
+        key: ${{ runner.os }}-ollama
+        path: |
+          /usr/local/bin/ollama
+          /usr/bin/ollama
+          /bin/ollama
+          ~/bin/ollama
+          ~/.local/bin/ollama
+          ~/.ollama
+
+    - name: Restore modified time
+      uses: chetan/git-restore-mtime-action@v2
+
+    - name: Install Ollama
+      if: steps.cache-ollama.outputs.cache-hit != 'true'
+      shell: bash # It's required for run step to specify shell in a composite action.
+      run: make deps:ollama
+
+    - name: Fix permissions
+      shell: bash # It's required for run step to specify shell in a composite action.
+      run: |
+        sudo chmod -R 777 ~/.ollama
+
+    - name: Run Ollama
+      shell: bash # It's required for run step to specify shell in a composite action.
+      run: make ollama
+
+    - name: Pull LLM model
+      shell: bash # It's required for run step to specify shell in a composite action.
+      run: make ollama:nomic
