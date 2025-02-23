@@ -203,7 +203,7 @@ ollama:
 .PHONY: ollama\:nomic
 ollama\:nomic:
 # make sure ollama is running before continuing
-	time curl --retry 5 --retry-connrefused --retry-delay 0 -sf http://localhost:11434
+	time curl --retry 5 --retry-connrefused --retry-delay 0 -sf http://localhost:11434;
 	ollama pull nomic-embed-text
 
 .PHONY: dev\:start
