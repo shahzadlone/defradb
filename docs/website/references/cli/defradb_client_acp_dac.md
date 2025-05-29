@@ -1,15 +1,19 @@
-## defradb client acp policy
+## defradb client acp dac
 
-Interact with the acp policy features of DefraDB instance
+Interact with the document access control system of a DefraDB node
 
 ### Synopsis
 
-Interact with the acp policy features of DefraDB instance
+Interact with the document access control system of a DefraDB node
+
+Learn more about the DefraDB [ACP System](/acp/README.md)
+
+		
 
 ### Options
 
 ```
-  -h, --help   help for policy
+  -h, --help   help for dac
 ```
 
 ### Options inherited from parent commands
@@ -37,5 +41,6 @@ Interact with the acp policy features of DefraDB instance
 ### SEE ALSO
 
 * [defradb client acp](defradb_client_acp.md)	 - Interact with the access control system of a DefraDB node
-* [defradb client acp policy add](defradb_client_acp_policy_add.md)	 - Add new policy
+* [defradb client acp dac policy](defradb_client_acp_dac_policy.md)	 - Interact with the acp policy features of DefraDB instance
+* [defradb client acp dac relationship](defradb_client_acp_dac_relationship.md)	 - Interact with the acp relationship features of DefraDB instance
 

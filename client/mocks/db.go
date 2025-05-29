@@ -46,12 +46,12 @@ func (_m *DB) EXPECT() *DB_Expecter {
 	return &DB_Expecter{mock: &_m.Mock}
 }
 
-// AddDocActorRelationship provides a mock function for the type DB
-func (_mock *DB) AddDocActorRelationship(ctx context.Context, collectionName string, docID string, relation string, targetActor string) (client.AddActorRelationshipResult, error) {
+// AddActorRelationshipWithDAC provides a mock function for the type DB
+func (_mock *DB) AddActorRelationshipWithDAC(ctx context.Context, collectionName string, docID string, relation string, targetActor string) (client.AddActorRelationshipResult, error) {
 	ret := _mock.Called(ctx, collectionName, docID, relation, targetActor)
 
 	if len(ret) == 0 {
-		panic("no return value specified for AddDocActorRelationship")
+		panic("no return value specified for AddActorRelationshipWithDAC")
 	}
 
 	var r0 client.AddActorRelationshipResult
@@ -72,34 +72,34 @@ func (_mock *DB) AddDocActorRelationship(ctx context.Context, collectionName str
 	return r0, r1
 }
 
-// DB_AddDocActorRelationship_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'AddDocActorRelationship'
-type DB_AddDocActorRelationship_Call struct {
+// DB_AddActorRelationshipWithDAC_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'AddActorRelationshipWithDAC'
+type DB_AddActorRelationshipWithDAC_Call struct {
 	*mock.Call
 }
 
-// AddDocActorRelationship is a helper method to define mock.On call
+// AddActorRelationshipWithDAC is a helper method to define mock.On call
 //   - ctx
 //   - collectionName
 //   - docID
 //   - relation
 //   - targetActor
-func (_e *DB_Expecter) AddDocActorRelationship(ctx interface{}, collectionName interface{}, docID interface{}, relation interface{}, targetActor interface{}) *DB_AddDocActorRelationship_Call {
-	return &DB_AddDocActorRelationship_Call{Call: _e.mock.On("AddDocActorRelationship", ctx, collectionName, docID, relation, targetActor)}
+func (_e *DB_Expecter) AddActorRelationshipWithDAC(ctx interface{}, collectionName interface{}, docID interface{}, relation interface{}, targetActor interface{}) *DB_AddActorRelationshipWithDAC_Call {
+	return &DB_AddActorRelationshipWithDAC_Call{Call: _e.mock.On("AddActorRelationshipWithDAC", ctx, collectionName, docID, relation, targetActor)}
 }
 
-func (_c *DB_AddDocActorRelationship_Call) Run(run func(ctx context.Context, collectionName string, docID string, relation string, targetActor string)) *DB_AddDocActorRelationship_Call {
+func (_c *DB_AddActorRelationshipWithDAC_Call) Run(run func(ctx context.Context, collectionName string, docID string, relation string, targetActor string)) *DB_AddActorRelationshipWithDAC_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		run(args[0].(context.Context), args[1].(string), args[2].(string), args[3].(string), args[4].(string))
 	})
 	return _c
 }
 
-func (_c *DB_AddDocActorRelationship_Call) Return(addDocActorRelationshipResult client.AddActorRelationshipResult, err error) *DB_AddDocActorRelationship_Call {
-	_c.Call.Return(addDocActorRelationshipResult, err)
+func (_c *DB_AddActorRelationshipWithDAC_Call) Return(addActorRelationshipResult client.AddActorRelationshipResult, err error) *DB_AddActorRelationshipWithDAC_Call {
+	_c.Call.Return(addActorRelationshipResult, err)
 	return _c
 }
 
-func (_c *DB_AddDocActorRelationship_Call) RunAndReturn(run func(ctx context.Context, collectionName string, docID string, relation string, targetActor string) (client.AddActorRelationshipResult, error)) *DB_AddDocActorRelationship_Call {
+func (_c *DB_AddActorRelationshipWithDAC_Call) RunAndReturn(run func(ctx context.Context, collectionName string, docID string, relation string, targetActor string) (client.AddActorRelationshipResult, error)) *DB_AddActorRelationshipWithDAC_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -150,12 +150,12 @@ func (_c *DB_AddP2PCollections_Call) RunAndReturn(run func(ctx context.Context, 
 	return _c
 }
 
-// AddPolicy provides a mock function for the type DB
-func (_mock *DB) AddPolicy(ctx context.Context, policy string) (client.AddPolicyResult, error) {
+// AddPolicyWithDAC provides a mock function for the type DB
+func (_mock *DB) AddPolicyWithDAC(ctx context.Context, policy string) (client.AddPolicyResult, error) {
 	ret := _mock.Called(ctx, policy)
 
 	if len(ret) == 0 {
-		panic("no return value specified for AddPolicy")
+		panic("no return value specified for AddPolicyWithDAC")
 	}
 
 	var r0 client.AddPolicyResult
@@ -176,31 +176,31 @@ func (_mock *DB) AddPolicy(ctx context.Context, policy string) (client.AddPolicy
 	return r0, r1
 }
 
-// DB_AddPolicy_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'AddPolicy'
-type DB_AddPolicy_Call struct {
+// DB_AddPolicyWithDAC_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'AddPolicyWithDAC'
+type DB_AddPolicyWithDAC_Call struct {
 	*mock.Call
 }
 
-// AddPolicy is a helper method to define mock.On call
+// AddPolicyWithDAC is a helper method to define mock.On call
 //   - ctx
 //   - policy
-func (_e *DB_Expecter) AddPolicy(ctx interface{}, policy interface{}) *DB_AddPolicy_Call {
-	return &DB_AddPolicy_Call{Call: _e.mock.On("AddPolicy", ctx, policy)}
+func (_e *DB_Expecter) AddPolicyWithDAC(ctx interface{}, policy interface{}) *DB_AddPolicyWithDAC_Call {
+	return &DB_AddPolicyWithDAC_Call{Call: _e.mock.On("AddPolicyWithDAC", ctx, policy)}
 }
 
-func (_c *DB_AddPolicy_Call) Run(run func(ctx context.Context, policy string)) *DB_AddPolicy_Call {
+func (_c *DB_AddPolicyWithDAC_Call) Run(run func(ctx context.Context, policy string)) *DB_AddPolicyWithDAC_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		run(args[0].(context.Context), args[1].(string))
 	})
 	return _c
 }
 
-func (_c *DB_AddPolicy_Call) Return(addPolicyResult client.AddPolicyResult, err error) *DB_AddPolicy_Call {
+func (_c *DB_AddPolicyWithDAC_Call) Return(addPolicyResult client.AddPolicyResult, err error) *DB_AddPolicyWithDAC_Call {
 	_c.Call.Return(addPolicyResult, err)
 	return _c
 }
 
-func (_c *DB_AddPolicy_Call) RunAndReturn(run func(ctx context.Context, policy string) (client.AddPolicyResult, error)) *DB_AddPolicy_Call {
+func (_c *DB_AddPolicyWithDAC_Call) RunAndReturn(run func(ctx context.Context, policy string) (client.AddPolicyResult, error)) *DB_AddPolicyWithDAC_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -492,12 +492,12 @@ func (_c *DB_Close_Call) RunAndReturn(run func()) *DB_Close_Call {
 	return _c
 }
 
-// DeleteDocActorRelationship provides a mock function for the type DB
-func (_mock *DB) DeleteDocActorRelationship(ctx context.Context, collectionName string, docID string, relation string, targetActor string) (client.DeleteActorRelationshipResult, error) {
+// DeleteActorRelationshipWithDAC provides a mock function for the type DB
+func (_mock *DB) DeleteActorRelationshipWithDAC(ctx context.Context, collectionName string, docID string, relation string, targetActor string) (client.DeleteActorRelationshipResult, error) {
 	ret := _mock.Called(ctx, collectionName, docID, relation, targetActor)
 
 	if len(ret) == 0 {
-		panic("no return value specified for DeleteDocActorRelationship")
+		panic("no return value specified for DeleteActorRelationshipWithDAC")
 	}
 
 	var r0 client.DeleteActorRelationshipResult
@@ -518,34 +518,34 @@ func (_mock *DB) DeleteDocActorRelationship(ctx context.Context, collectionName 
 	return r0, r1
 }
 
-// DB_DeleteDocActorRelationship_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'DeleteDocActorRelationship'
-type DB_DeleteDocActorRelationship_Call struct {
+// DB_DeleteActorRelationshipWithDAC_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'DeleteActorRelationshipWithDAC'
+type DB_DeleteActorRelationshipWithDAC_Call struct {
 	*mock.Call
 }
 
-// DeleteDocActorRelationship is a helper method to define mock.On call
+// DeleteActorRelationshipWithDAC is a helper method to define mock.On call
 //   - ctx
 //   - collectionName
 //   - docID
 //   - relation
 //   - targetActor
-func (_e *DB_Expecter) DeleteDocActorRelationship(ctx interface{}, collectionName interface{}, docID interface{}, relation interface{}, targetActor interface{}) *DB_DeleteDocActorRelationship_Call {
-	return &DB_DeleteDocActorRelationship_Call{Call: _e.mock.On("DeleteDocActorRelationship", ctx, collectionName, docID, relation, targetActor)}
+func (_e *DB_Expecter) DeleteActorRelationshipWithDAC(ctx interface{}, collectionName interface{}, docID interface{}, relation interface{}, targetActor interface{}) *DB_DeleteActorRelationshipWithDAC_Call {
+	return &DB_DeleteActorRelationshipWithDAC_Call{Call: _e.mock.On("DeleteActorRelationshipWithDAC", ctx, collectionName, docID, relation, targetActor)}
 }
 
-func (_c *DB_DeleteDocActorRelationship_Call) Run(run func(ctx context.Context, collectionName string, docID string, relation string, targetActor string)) *DB_DeleteDocActorRelationship_Call {
+func (_c *DB_DeleteActorRelationshipWithDAC_Call) Run(run func(ctx context.Context, collectionName string, docID string, relation string, targetActor string)) *DB_DeleteActorRelationshipWithDAC_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		run(args[0].(context.Context), args[1].(string), args[2].(string), args[3].(string), args[4].(string))
 	})
 	return _c
 }
 
-func (_c *DB_DeleteDocActorRelationship_Call) Return(deleteActorRelationshipWithDACResult client.DeleteActorRelationshipResult, err error) *DB_DeleteDocActorRelationship_Call {
-	_c.Call.Return(deleteActorRelationshipWithDACResult, err)
+func (_c *DB_DeleteActorRelationshipWithDAC_Call) Return(deleteActorRelationshipResult client.DeleteActorRelationshipResult, err error) *DB_DeleteActorRelationshipWithDAC_Call {
+	_c.Call.Return(deleteActorRelationshipResult, err)
 	return _c
 }
 
-func (_c *DB_DeleteDocActorRelationship_Call) RunAndReturn(run func(ctx context.Context, collectionName string, docID string, relation string, targetActor string) (client.DeleteActorRelationshipResult, error)) *DB_DeleteDocActorRelationship_Call {
+func (_c *DB_DeleteActorRelationshipWithDAC_Call) RunAndReturn(run func(ctx context.Context, collectionName string, docID string, relation string, targetActor string) (client.DeleteActorRelationshipResult, error)) *DB_DeleteActorRelationshipWithDAC_Call {
 	_c.Call.Return(run)
 	return _c
 }
