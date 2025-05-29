@@ -172,7 +172,7 @@ defradb client ... --identity e3b722906ee4e56368f581cd8b18ab0f48af1ea53e635e3f7b
 
 ### Adding a Policy:
 
-We have in `examples/dpi_policy/user_dpi_policy.yml`:
+We have in `examples/policy/dac_policy.yml`:
 ```yaml
 name: An Example Policy
 
@@ -208,7 +208,7 @@ resources:
 
 CLI Command:
 ```sh
-defradb client acp policy add -f examples/dpi_policy/user_dpi_policy.yml --identity e3b722906ee4e56368f581cd8b18ab0f48af1ea53e635e3f7b8acd076676f6ac
+defradb client acp policy add -f examples/policy/dac_policy.yml --identity e3b722906ee4e56368f581cd8b18ab0f48af1ea53e635e3f7b8acd076676f6ac
 ```
 
 Result:
@@ -457,7 +457,7 @@ Note:
   and a relationship is formed, the subject/actor will still not be able to access (read or update or delete) the resource.
   - If the relationship already exists, then it will just be a no-op.
 
-Consider the following policy that we have under `examples/dpi_policy/user_dpi_policy_with_manages.yml`:
+Consider the following policy that we have under `examples/policy/dac_policy_with_manages.yml`:
 
 ```yaml
 name: An Example Policy
@@ -516,7 +516,7 @@ resources:
 
 Add the policy:
 ```sh
-defradb client acp policy add -f examples/dpi_policy/user_dpi_policy_with_manages.yml \
+defradb client acp policy add -f examples/policy/dac_policy_with_manages.yml \
 --identity e3b722906ee4e56368f581cd8b18ab0f48af1ea53e635e3f7b8acd076676f6ac
 ```
 
