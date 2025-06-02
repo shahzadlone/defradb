@@ -54,6 +54,6 @@ func init() {
 
 	if !goClient && !httpClient && !cliClient {
 		// Default is to test go client type.
-		goClient = true
+		cliClient = true
 	}
 }
