@@ -139,6 +139,42 @@ func (w *Wrapper) DeleteActorRelationshipWithDAC(
 	)
 }
 
+func (w *Wrapper) AddActorRelationshipWithAAC(
+	ctx context.Context,
+	relation string,
+	targetActor string,
+) (client.AddActorRelationshipResult, error) {
+	return w.client.AddActorRelationshipWithAAC(
+		ctx,
+		relation,
+		targetActor,
+	)
+}
+
+func (w *Wrapper) DeleteActorRelationshipWithAAC(
+	ctx context.Context,
+	relation string,
+	targetActor string,
+) (client.DeleteActorRelationshipResult, error) {
+	return w.client.DeleteActorRelationshipWithAAC(
+		ctx,
+		relation,
+		targetActor,
+	)
+}
+
+func (w *Wrapper) ReEnableAdminACP(ctx context.Context) error {
+	return w.client.ReEnableAdminACP(ctx)
+}
+
+func (w *Wrapper) DisableAdminACP(ctx context.Context) error {
+	return w.client.DisableAdminACP(ctx)
+}
+
+func (w *Wrapper) AdminACPStatus(ctx context.Context) (client.StatusAACResult, error) {
+	return w.client.AdminACPStatus(ctx)
+}
+
 func (w *Wrapper) PatchSchema(
 	ctx context.Context,
 	patch string,

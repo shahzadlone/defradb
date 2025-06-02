@@ -140,3 +140,135 @@ func (c *Client) DeleteActorRelationshipWithDAC(
 
 	return deleteDocActorRelResult, nil
 }
+
+type addActorRelationshipWithAACRequest struct {
+	Relation    string
+	TargetActor string
+}
+
+func (c *Client) AddActorRelationshipWithAAC(
+	ctx context.Context,
+	relation string,
+	targetActor string,
+) (client.AddActorRelationshipResult, error) {
+	methodURL := c.http.apiURL.JoinPath("acp", "aac", "relationship")
+
+	body, err := json.Marshal(
+		addActorRelationshipWithAACRequest{
+			Relation:    relation,
+			TargetActor: targetActor,
+		},
+	)
+
+	if err != nil {
+		return client.AddActorRelationshipResult{}, err
+	}
+
+	req, err := http.NewRequestWithContext(
+		ctx,
+		http.MethodPost,
+		methodURL.String(),
+		bytes.NewBuffer(body),
+	)
+
+	if err != nil {
+		return client.AddActorRelationshipResult{}, err
+	}
+
+	var addDocActorRelResult client.AddActorRelationshipResult
+	if err := c.http.requestJson(req, &addDocActorRelResult); err != nil {
+		return client.AddActorRelationshipResult{}, err
+	}
+
+	return addDocActorRelResult, nil
+}
+
+type deleteActorRelationshipWithAACRequest struct {
+	Relation    string
+	TargetActor string
+}
+
+func (c *Client) DeleteActorRelationshipWithAAC(
+	ctx context.Context,
+	relation string,
+	targetActor string,
+) (client.DeleteActorRelationshipResult, error) {
+	methodURL := c.http.apiURL.JoinPath("acp", "aac", "relationship")
+
+	body, err := json.Marshal(
+		deleteActorRelationshipWithAACRequest{
+			Relation:    relation,
+			TargetActor: targetActor,
+		},
+	)
+
+	if err != nil {
+		return client.DeleteActorRelationshipResult{}, err
+	}
+
+	req, err := http.NewRequestWithContext(
+		ctx,
+		http.MethodDelete,
+		methodURL.String(),
+		bytes.NewBuffer(body),
+	)
+
+	if err != nil {
+		return client.DeleteActorRelationshipResult{}, err
+	}
+
+	var deleteDocActorRelResult client.DeleteActorRelationshipResult
+	if err := c.http.requestJson(req, &deleteDocActorRelResult); err != nil {
+		return client.DeleteActorRelationshipResult{}, err
+	}
+
+	return deleteDocActorRelResult, nil
+}
+
+func (c *Client) ReEnableAdminACP(ctx context.Context) error {
+	methodURL := c.http.apiURL.JoinPath("acp", "aac", "re-enable")
+
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, methodURL.String(), nil)
+	if err != nil {
+		return err
+	}
+
+	_, err = c.http.request(req)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (c *Client) DisableAdminACP(ctx context.Context) error {
+	methodURL := c.http.apiURL.JoinPath("acp", "aac", "disable")
+
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, methodURL.String(), nil)
+	if err != nil {
+		return err
+	}
+
+	_, err = c.http.request(req)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (c *Client) AdminACPStatus(ctx context.Context) (client.StatusAACResult, error) {
+	methodURL := c.http.apiURL.JoinPath("acp", "aac", "status")
+
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, methodURL.String(), nil)
+	if err != nil {
+		return client.StatusAACResult{}, err
+	}
+
+	var statusAACResult client.StatusAACResult
+	if err := c.http.requestJson(req, &statusAACResult); err != nil {
+		return client.StatusAACResult{}, err
+	}
+
+	return statusAACResult, nil
+}
