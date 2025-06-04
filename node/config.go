@@ -29,6 +29,7 @@ type Option any
 
 // Config contains node configuration values.
 type Config struct {
+	enableAAC         bool
 	disableP2P        bool
 	disableAPI        bool
 	enableDevelopment bool
