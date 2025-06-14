@@ -34,6 +34,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
+	acpIdentity "github.com/sourcenetwork/defradb/acp/identity"
 	"github.com/sourcenetwork/defradb/client"
 	"github.com/sourcenetwork/defradb/client/request"
 	"github.com/sourcenetwork/defradb/crypto"
@@ -781,6 +782,10 @@ func startNodes(s *state, action Start) {
 		waitForNetworkSetupEvents(s, nodeIndex)
 	}
 
+	// If the db was restarted we need to refresh the existing tokens as the audiance value changed,
+	// If we don't do this, then any existing tokens will be using the old audiance value upon restart.
+	refreshTokens(s)
+
 	// If the db was restarted we need to refresh the collection definitions as the old instances
 	// will reference the old (closed) database instances.
 	refreshCollections(s)
@@ -795,6 +800,32 @@ func restartNodes(
 	closeNodes(s, Close{})
 	startNodes(s, Start{})
 	reconnectPeers(s)
+}
+
+// refreshTokens refreshes all the existing tokens, preserving order.
+func refreshTokens(
+	s *state,
+) {
+	for identKey, identHolder := range s.identities {
+		identityToUpdate := identHolder.Identity
+		if fullIdentityToUpdate, ok := identityToUpdate.(acpIdentity.FullIdentity); ok {
+			nodeTokensToUpdate := identHolder.NodeTokens
+			for nodeKey := range identHolder.NodeTokens {
+				if audience := getNodeAudience(s, nodeKey); audience.HasValue() {
+					err := fullIdentityToUpdate.UpdateToken(
+						authTokenExpiration,
+						audience,
+						immutable.Some(s.sourcehubAddress),
+					)
+					require.NoError(s.t, err)
+					nodeTokensToUpdate[nodeKey] = fullIdentityToUpdate.BearerToken()
+				}
+			}
+			identHolder.Identity = identityToUpdate
+			identHolder.NodeTokens = nodeTokensToUpdate
+			s.identities[identKey] = identHolder
+		}
+	}
 }
 
 // refreshCollections refreshes all the collections of the given names, preserving order.
