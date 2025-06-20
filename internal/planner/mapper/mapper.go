@@ -305,8 +305,7 @@ outer:
 	return nil
 }
 
-// given a type join field, ensure its mapping exists
-// and add a coorsponding select field(s)
+// resolveChildOrder ensures mapping exists for a given type join field and adds coorsponding select field(s)
 func resolveChildOrder(
 	ctx context.Context,
 	store client.Store,
@@ -1750,7 +1749,7 @@ type aggregateRequestTarget struct {
 	order immutable.Option[request.OrderBy]
 }
 
-// Returns the source of the aggregate as requested by the consumer
+// getAggregateSources returns the source of the aggregate as requested by the consumer
 func getAggregateSources(field *request.Aggregate) ([]*aggregateRequestTarget, error) {
 	targets := make([]*aggregateRequestTarget, len(field.Targets))
 

@@ -45,7 +45,7 @@ func inverse[T any](original func(T, T) bool) func(T, T) bool {
 	}
 }
 
-// reduces the documents in a slice, skipping over hidden items (a grouping mechanic).
+// reduceDocs reduces the documents in a slice, skipping over hidden items (a grouping mechanic).
 //
 // Docs should be reduced with this function to avoid applying offsets twice (once in the
 // select, then once here).

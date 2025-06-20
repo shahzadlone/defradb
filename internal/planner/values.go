@@ -30,7 +30,6 @@ type valuesNode struct {
 	docMapper
 
 	p *Planner
-	// plan planNode
 
 	ordering []mapper.OrderCondition
 
@@ -131,7 +130,7 @@ func (n *valuesNode) Len() int {
 	return n.docs.Len()
 }
 
-// getMapProp is a utility to easily get a specific
+// getDocProp is a utility to easily get a specific
 // property from a map object. The map may have further nested maps
 // that need to be accessed.
 // The prop argument has the entire selection of keys to grab in the

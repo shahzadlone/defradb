@@ -170,7 +170,7 @@ func normalizeProperty(parentKey connor.FilterKey, condition any) any {
 	}
 }
 
-// normalizeProperty flattens and groups property filters where possible.
+// normalizeProperties flattens and groups property filters where possible.
 //
 // Filters targeting the same property will be grouped into a single _and.
 func normalizeProperties(parentKey connor.FilterKey, conditions []any) []any {
