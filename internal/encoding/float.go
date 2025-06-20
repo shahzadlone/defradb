@@ -183,7 +183,7 @@ const (
 	uvneginf = 0xFF800000
 )
 
-// Inf returns positive infinity if sign >= 0, negative infinity if sign < 0.
+// Float32Inf returns positive infinity if sign >= 0, negative infinity if sign < 0.
 func Float32Inf(sign int) float32 {
 	var v uint32
 	if sign >= 0 {
@@ -194,16 +194,16 @@ func Float32Inf(sign int) float32 {
 	return math.Float32frombits(v)
 }
 
-// NaN returns an IEEE 754 “not-a-number” value.
+// Float32NaN returns an IEEE 754 “not-a-number” value.
 func Float32NaN() float32 { return math.Float32frombits(uvnan) }
 
-// IsNaN reports whether f is an IEEE 754 “not-a-number” value.
+// Float32IsNaN reports whether f is an IEEE 754 “not-a-number” value.
 func Float32IsNaN(f float32) (is bool) {
 	// IEEE 754 says that only NaNs satisfy f != f.
 	return f != f
 }
 
-// IsInf reports whether f is an infinity, according to sign.
+// Float32IsInf reports whether f is an infinity, according to sign.
 // If sign > 0, IsInf reports whether f is positive infinity.
 // If sign < 0, IsInf reports whether f is negative infinity.
 // If sign == 0, IsInf reports whether f is either infinity.
@@ -211,7 +211,7 @@ func Float32IsInf(f float32, sign int) bool {
 	return sign >= 0 && f > math.MaxFloat32 || sign <= 0 && f < -math.MaxFloat32
 }
 
-// Copysign returns a value with the magnitude of f
+// Float32Copysign returns a value with the magnitude of f
 // and the sign of sign.
 func Float32Copysign(f, sign float32) float32 {
 	const signBit = 1 << 31
