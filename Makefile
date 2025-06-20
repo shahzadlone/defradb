@@ -376,6 +376,7 @@ validate\:circleci:
 lint:
 	golangci-lint run --config tools/configs/golangci.yaml
 	yamllint -c tools/configs/yamllint.yaml .
+	bash tools/scripts/check_comment_func_mismatch.sh .
 
 .PHONY: lint\:fix
 lint\:fix:
@@ -426,6 +427,7 @@ toc:
 fix:
 	@$(MAKE) deps
 	@$(MAKE) lint\:fix
+	@$(MAKE) lint
 	@$(MAKE) tidy
 	@$(MAKE) mocks
 	@$(MAKE) docs
