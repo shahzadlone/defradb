@@ -44,7 +44,7 @@ import (
 // respective substores don't need to optimize or worry about Batching/Txn.
 // Hence the simplified DSReaderWriter.
 
-// NewBlockstore returns a default Blockstore implementation
+// newBlockstore returns a default Blockstore implementation
 // using the provided datastore.Batching backend.
 func newBlockstore(store DSReaderWriter) *bstore {
 	return &bstore{
