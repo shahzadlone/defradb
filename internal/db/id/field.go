@@ -132,7 +132,7 @@ func SetShortFieldID(
 	return nil
 }
 
-// SetShortFieldID sets and stores the short field ids, if they do not already exist.
+// SetShortFieldIDs sets and stores the short field ids, if they do not already exist.
 func SetShortFieldIDs(ctx context.Context, collection client.CollectionVersion) error {
 	collectionShortID, err := GetShortCollectionID(ctx, collection.CollectionID)
 	if err != nil {
@@ -156,7 +156,7 @@ type fieldShortIDCacheKey struct{}
 // In the near future the key will be replaced by the field cid.
 type fieldShortIDCache map[string]uint32
 
-// InitCollectionShortIDCache initialializes the context with a none-nil collection
+// InitFieldShortIDCache initialializes the context with a none-nil collection
 // short-id cache.
 //
 // It is done to avoid an extra check to see if the cache exists or not when fetching
@@ -165,7 +165,7 @@ func InitFieldShortIDCache(ctx context.Context) context.Context {
 	return context.WithValue(ctx, fieldShortIDCacheKey{}, fieldShortIDCache{})
 }
 
-// getCollectionShortIDCache retrieves the collection short-id cache from the given context.
+// getFieldShortIDCache retrieves the collection short-id cache from the given context.
 func getFieldShortIDCache(ctx context.Context) fieldShortIDCache {
 	return ctx.Value(fieldShortIDCacheKey{}).(fieldShortIDCache) //nolint:forcetypeassert
 }

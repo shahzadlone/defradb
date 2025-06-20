@@ -190,7 +190,7 @@ func GetSchemas(
 	return descriptions, nil
 }
 
-// GetSchemas returns all schema versions in the system.
+// GetAllSchemas returns all schema versions in the system.
 func GetAllSchemas(
 	ctx context.Context,
 	txn datastore.Txn,
