@@ -223,6 +223,9 @@ func ExecuteTestCase(
 	databases = skipIfDatabaseTypeUnsupported(t, databases, testCase.SupportedDatabaseTypes)
 	clients = skipIfClientTypeUnsupported(t, clients, testCase.SupportedClientTypes)
 
+	// We do this because for now JSClient only supports badger in-memory database.
+	clients = skipJSClientIfUnsupportedDBType(t, clients, databases)
+
 	ctx := context.Background()
 	for _, ct := range clients {
 		for _, dbt := range databases {
@@ -810,7 +813,11 @@ func startNodes(s *state, action Start) {
 
 		node.p2p = s.nodes[nodeIndex].p2p
 		s.nodes[nodeIndex] = node
-		waitForNetworkSetupEvents(s, nodeIndex)
+		if !skipNetworkTests {
+			// JS client does not implement some p2p logic, so this can panic for js client tests,
+			// so we skip this part when network tests are skipped.
+			waitForNetworkSetupEvents(s, nodeIndex)
+		}
 	}
 
 	// If the db was restarted we need to refresh the existing tokens as the audiance value changed,
@@ -2403,6 +2410,42 @@ func skipIfClientTypeUnsupported(
 
 	if len(filteredClients) == 0 {
 		t.Skipf("test does not support any given client type. Supported Type: %v", supportedClientTypes.Value())
+	}
+
+	return filteredClients
+}
+
+// skipJSClientIfUnsupportedDBType returns a filtered set of client types, removing JS client type
+// if any database type is not compatible with the JS client type.
+//
+// If the resultant filtered set of clients types is empty the test will be skipped.
+func skipJSClientIfUnsupportedDBType(
+	t testing.TB,
+	clients []ClientType,
+	databases []DatabaseType,
+) []ClientType {
+	filteredClients := []ClientType{}
+	for _, client := range clients {
+		if client != JSClientType {
+			filteredClients = append(filteredClients, client)
+			continue
+		}
+
+		// If client is JS type then we need to make sure that all databases types are compatible.
+		keepJSClient := true
+		for _, databaseType := range databases {
+			if databaseType != BadgerIMType {
+				keepJSClient = false
+				break
+			}
+		}
+		if keepJSClient {
+			filteredClients = append(filteredClients, client)
+		}
+	}
+
+	if len(filteredClients) == 0 {
+		t.Skipf("test does not support any clients after JS client was filtered")
 	}
 
 	return filteredClients
