@@ -113,15 +113,6 @@ func NewAdminInfoWithAACEnabled(ctx context.Context, path string) (AdminInfo, er
 	return adminInfo, nil
 }
 
-// TODO-ACP-ADMIN: REMOVE THESE AND CONSOLODATE with permission package errors or to client
-const (
-	errInvalidResourcePermissionType string = "invalid resource permission type"
-)
-
-var (
-	ErrInvalidResourcePermissionType = errors.New(errInvalidResourcePermissionType)
-)
-
 func (db *DB) fetchAdminACPDesc(ctx context.Context, txn datastore.Txn) error {
 	storedBytes, err := txn.Systemstore().Get(ctx, keys.NewAdminACPKey().Bytes())
 	if err != nil {
@@ -432,7 +423,7 @@ func CheckAACNodeOperationAccess(
 
 	adminResourcePerm, ok := permission.(acpTypes.AdminResourcePermission)
 	if !ok {
-		return ErrInvalidResourcePermissionType
+		return client.ErrInvalidResourcePermissionType
 	}
 
 	// Now actually check using the signature if this identity has access or not.

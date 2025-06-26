@@ -44,6 +44,7 @@ const (
 	errEmptyModelForEmbedding             string = "embedding Model cannot be empty"
 	errUnknownEmbeddingProvider           string = "unknown embedding provider"
 	errEmbeddingFieldEmbedding            string = "embedding fields cannot refer to self or another embedding field"
+	errInvalidResourcePermissionType      string = "invalid resource permission type"
 	errCanNotStartAACWithoutIdentity      string = "can not start aac without identity"
 	errCanNotDoThisAACOpWithAACIsDisabled string = "can not do this aac operation when aac is disabled"
 )
@@ -87,6 +88,7 @@ var (
 	ErrUnknownEmbeddingProvider             = errors.New(errUnknownEmbeddingProvider)
 	ErrEmbeddingFieldEmbedding              = errors.New(errEmbeddingFieldEmbedding)
 	ErrNotFound                             = errors.New(errNotFound)
+	ErrInvalidResourcePermissionType        = errors.New(errInvalidResourcePermissionType)
 	ErrCanNotStartAACWithoutIdentity        = errors.New(errCanNotStartAACWithoutIdentity)
 	ErrCanNotDoThisAACOpWithAACIsDisabled   = errors.New(errCanNotDoThisAACOpWithAACIsDisabled)
 )
