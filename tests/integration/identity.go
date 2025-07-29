@@ -108,6 +108,15 @@ func getIdentity(s *state, identity immutable.Option[Identity]) acpIdentity.Iden
 	return getIdentityHolder(s, identity.Value()).Identity
 }
 
+// getIdentityOption returns the identity similar to [getIdentity] but in immutable.Option.
+func getIdentityOption(s *state, identity immutable.Option[Identity]) immutable.Option[acpIdentity.Identity] {
+	ident := getIdentity(s, identity)
+	if ident == nil {
+		return acpIdentity.None
+	}
+	return immutable.Some(ident)
+}
+
 // getIdentityHolder returns the identity holder for the given reference.
 // If the identity does not exist, it will be generated.
 func getIdentityHolder(s *state, identity Identity) *identityHolder {

@@ -804,8 +804,8 @@ func startNodes(s *state, action Start) {
 		opts = append(opts, netConfig.WithListenAddresses(addresses...))
 		node, err := setupNode(
 			s,
-			getIdentityForRequestSpecificToNode(s, action.Identity, nodeIndex),
-			action.EnableAAC,
+			getIdentityOption(s, action.Identity),
+			action.EnableNAC,
 			opts...,
 		)
 		databaseDir = originalPath
