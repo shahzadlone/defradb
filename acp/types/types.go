@@ -94,6 +94,9 @@ const (
 	NodeSchemaAddPerm
 	NodeSchemaPatchPerm
 	NodePatchCollectionPerm
+	NodeIndexListPerm
+	NodeIndexCreatePerm
+	NodeIndexDropPerm
 	NodeGetIdentityPerm
 	NodeVerifySignaturePerm
 )
@@ -122,6 +125,9 @@ var RequiredResourcePermissionsForNode = []string{
 	"schema-add",
 	"schema-patch",
 	"patch-collection",
+	"index-list",
+	"index-create",
+	"index-drop",
 	"node-get-identity",
 	"verify-signature",
 }
@@ -179,6 +185,12 @@ resources:
       schema-patch:
         expr: owner + admin
       patch-collection:
+        expr: owner + admin
+      index-list:
+        expr: owner + admin
+      index-create:
+        expr: owner + admin
+      index-drop:
         expr: owner + admin
       node-get-identity:
         expr: owner + admin
