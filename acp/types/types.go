@@ -97,6 +97,9 @@ const (
 	NodeIndexListPerm
 	NodeIndexCreatePerm
 	NodeIndexDropPerm
+	NodeDocReadPerm
+	NodeDocUpdatePerm
+	NodeDocDeletePerm
 	NodeGetIdentityPerm
 	NodeVerifySignaturePerm
 )
@@ -128,6 +131,9 @@ var RequiredResourcePermissionsForNode = []string{
 	"index-list",
 	"index-create",
 	"index-drop",
+	"doc-read",
+	"doc-update",
+	"doc-delete",
 	"node-get-identity",
 	"verify-signature",
 }
@@ -191,6 +197,12 @@ resources:
       index-create:
         expr: owner + admin
       index-drop:
+        expr: owner + admin
+      doc-read:
+        expr: owner + admin
+      doc-update:
+        expr: owner + admin
+      doc-delete:
         expr: owner + admin
       node-get-identity:
         expr: owner + admin
