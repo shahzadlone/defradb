@@ -1265,9 +1265,12 @@ func setActiveSchemaVersion(
 	s *state.State,
 	action SetActiveSchemaVersion,
 ) {
-	_, nodes := getNodesWithIDs(action.NodeID, s.Nodes)
-	for _, node := range nodes {
+	nodeIDs, nodes := getNodesWithIDs(action.NodeID, s.Nodes)
+	for index, node := range nodes {
+		nodeID := nodeIDs[index]
+		s.Ctx = getContextWithIdentity(s.Ctx, s, action.Identity, nodeID)
 		err := node.SetActiveSchemaVersion(s.Ctx, action.SchemaVersionID)
+		resetStateContext(s)
 		expectedErrorRaised := AssertError(s.T, err, action.ExpectedError)
 
 		assertExpectedErrorRaised(s.T, action.ExpectedError, expectedErrorRaised)
