@@ -90,6 +90,7 @@ const (
 	NodeNACRelationDeletePerm
 	NodeSchemaGetPerm
 	NodeSchemaGetByVersionPerm
+	NodeSchemaSetActiveVersionPerm
 	NodeSchemaAddPerm
 	NodeSchemaPatchPerm
 	NodePatchCollectionPerm
@@ -115,6 +116,7 @@ var RequiredResourcePermissionsForNode = []string{
 	"nac-relation-delete",
 	"schema-get",
 	"schema-get-by-version",
+	"schema-set-active-version",
 	"schema-add",
 	"schema-patch",
 	"patch-collection",
@@ -165,6 +167,8 @@ resources:
       schema-get:
         expr: owner + admin
       schema-get-by-version:
+        expr: owner + admin
+      schema-set-active-version:
         expr: owner + admin
       schema-add:
         expr: owner + admin
