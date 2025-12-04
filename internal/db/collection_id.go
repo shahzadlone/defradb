@@ -179,30 +179,30 @@ func getCollectionSets(newCollections []*client.CollectionVersion) [][]*client.C
 	slices.Sort(circularCollectionNames)
 
 	var i int
-	collectionSetIds := map[string]int{}
+	collectionSetIDs := map[string]int{}
 	collectionsHit := map[string]struct{}{}
 	for _, name := range circularCollectionNames {
 		collection := collectionsWithRelations[name]
-		mapCollectionSetIDs(&i, collection, collectionSetIds, collectionsWithRelations, collectionsHit)
+		mapCollectionSetIDs(&i, collection, collectionSetIDs, collectionsWithRelations, collectionsHit)
 	}
 
 	collectionSetsByID := map[int][]*client.CollectionVersion{}
 	for _, collection := range newCollections {
-		collectionSetId, ok := collectionSetIds[collection.Name]
+		collectionSetID, ok := collectionSetIDs[collection.Name]
 		if !ok {
 			// In most cases, if a collection does not form a circular set then it will not be in
 			// collectionSetIds, and we can assign it a new, unused setID
 			i++
-			collectionSetId = i
+			collectionSetID = i
 		}
 
-		collectionSet, ok := collectionSetsByID[collectionSetId]
+		collectionSet, ok := collectionSetsByID[collectionSetID]
 		if !ok {
 			collectionSet = make([]*client.CollectionVersion, 0, 1)
 		}
 
 		collectionSet = append(collectionSet, collection)
-		collectionSetsByID[collectionSetId] = collectionSet
+		collectionSetsByID[collectionSetID] = collectionSet
 	}
 
 	collectionSets := [][]*client.CollectionVersion{}
@@ -224,7 +224,7 @@ func getCollectionSets(newCollections []*client.CollectionVersion) [][]*client.C
 // Parameters:
 //   - i: The largest setID so far assigned. This parameter is mutated by this function.
 //   - collection: The current collection to process
-//   - collectionSetIds: The set of already assigned setIDs mapped by collection name - this parameter will be mutated
+//   - collectionSetIDs: The set of already assigned setIDs mapped by collection name - this parameter will be mutated
 //     by this function
 //   - collectionRelationsByCollectionName: The full set of relevant collections/relations mapped by collection name
 //   - collectionsFullyProcessed: The set of collection names that have already been completely processed.  If
@@ -232,7 +232,7 @@ func getCollectionSets(newCollections []*client.CollectionVersion) [][]*client.C
 func mapCollectionSetIDs(
 	i *int,
 	collection collectionRelations,
-	collectionSetIds map[string]int,
+	collectionSetIDs map[string]int,
 	collectionRelationsByCollectionName map[string]collectionRelations,
 	collectionsFullyProcessed map[string]struct{},
 ) {
@@ -248,20 +248,20 @@ func mapCollectionSetIDs(
 
 		var circleID int
 		if circlesBackHere {
-			if id, ok := collectionSetIds[relation]; ok {
+			if id, ok := collectionSetIDs[relation]; ok {
 				// If this collection has already been assigned a setID, use that
 				circleID = id
 			} else {
-				collectionSetId, ok := collectionSetIds[collection.name]
+				collectionSetID, ok := collectionSetIDs[collection.name]
 				if !ok {
 					// If this collection has not already been assigned a setID, it must be
 					// the first discovered node in a new circle.  Assign it a new setID,
 					// this will be picked up by its circle-forming descendents.
 					*i = *i + 1
-					collectionSetId = *i
+					collectionSetID = *i
 				}
-				collectionSetIds[collection.name] = collectionSetId
-				circleID = collectionSetId
+				collectionSetIDs[collection.name] = collectionSetID
+				circleID = collectionSetID
 			}
 		} else {
 			// If this collection and its relations does not circle back to itself, we
@@ -270,11 +270,11 @@ func mapCollectionSetIDs(
 			circleID = *i
 		}
 
-		collectionSetIds[relation] = circleID
+		collectionSetIDs[relation] = circleID
 		mapCollectionSetIDs(
 			i,
 			collectionRelationsByCollectionName[relation],
-			collectionSetIds,
+			collectionSetIDs,
 			collectionRelationsByCollectionName,
 			collectionsFullyProcessed,
 		)
@@ -406,7 +406,7 @@ func saveBlocks(
 	ctx context.Context,
 	collectionSet []*client.CollectionVersion,
 ) error {
-	colIds := make([]cidlink.Link, 0, len(collectionSet))
+	colIDs := make([]cidlink.Link, 0, len(collectionSet))
 	hasSetUpdated := false
 
 	for _, collection := range collectionSet {
@@ -481,7 +481,7 @@ func saveBlocks(
 			collection.CollectionID = collection.VersionID
 		}
 
-		colIds = append(colIds, cid)
+		colIDs = append(colIDs, cid)
 
 		if oldCol.VersionID != "" {
 			var migration immutable.Option[string]
@@ -504,8 +504,8 @@ func saveBlocks(
 		colSetCRDT := crdt.NewCollectionSet(collectionSet[0].CollectionID)
 		delta := colSetCRDT.Delta()
 
-		links := make([]coreblock.DAGLink, 0, len(colIds))
-		for _, colId := range colIds {
+		links := make([]coreblock.DAGLink, 0, len(colIDs))
+		for _, colId := range colIDs {
 			links = append(links, coreblock.DAGLink{Link: colId})
 		}
 
