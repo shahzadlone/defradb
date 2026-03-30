@@ -42,4 +42,4 @@ jobs:
           cache: false
 
       - name: Build all dependencies
-        run: make deps
+        run: make deps:all

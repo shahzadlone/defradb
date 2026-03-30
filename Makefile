@@ -191,13 +191,21 @@ endif
 
 .PHONY: deps
 deps:
-	@$(MAKE) deps:modules && \
-	$(MAKE) deps:bench && \
+	@$(MAKE) deps:modules
+
+.PHONY: deps\:dev
+deps\:dev:
+	@$(MAKE) deps:bench && \
 	$(MAKE) deps:chglog && \
 	$(MAKE) deps:lint && \
 	$(MAKE) deps:vulncheck && \
 	$(MAKE) deps:test && \
 	$(MAKE) deps:mocks
+
+.PHONY: deps\:all
+deps\:all:
+	@$(MAKE) deps && \
+	$(MAKE) deps:dev
 
 .PHONY: mocks
 mocks:
@@ -453,7 +461,7 @@ toc:
 
 .PHONY: fix
 fix:
-	@$(MAKE) deps
+	@$(MAKE) deps\:all
 	@$(MAKE) lint\:fix
 	@$(MAKE) tidy
 	@$(MAKE) mocks
